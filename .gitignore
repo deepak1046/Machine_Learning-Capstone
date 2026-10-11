@@ -1,0 +1,33 @@
+# Virtual Environments
+.venv/
+env/
+venv/
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Frontend
+node_modules/
+app/web/dist/
+
+# Data and Models
+# Uncomment below to ignore large data or model files while preserving directory structure
+# data/raw/*
+# !data/raw/.gitkeep
+# data/processed/*
+# !data/processed/.gitkeep
+# saved_models/*
+# !saved_models/.gitkeep
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+saved_models/*
+!saved_models/.gitkeep
+.claude/

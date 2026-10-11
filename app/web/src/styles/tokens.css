@@ -1,0 +1,131 @@
+/*
+ * Design tokens.
+ *
+ * Dark graphite is the default; "light" is a daylight variant with the same structure.
+ * Semantic colors mean one thing each across the whole app:
+ *   accent (teal)  network activity, interactive elements, the primary data series
+ *   threat (red)   traffic the model flagged as an attack, critical alerts
+ *   warn (amber)   suspicious activity, misclassifications, anything that needs a second look
+ *   ok (green)     healthy system state and normal traffic
+ * Every text/background pair below was checked for WCAG AA (4.5:1 text, 3:1 control borders and chart marks).
+ *
+ * Breakpoints (media and container queries cannot read custom properties, so they are listed here):
+ *   viewport  < 64rem   sidebar becomes a top bar plus a bottom tab bar (shell.css)
+ *   .main container     40rem phone: two-column readouts, narrower labels
+ *                       46rem optional table columns (.col-wide) hide
+ *                       52rem model and input panels sit side by side
+ *                       56rem to 64rem charts pair up, the flow table gains a detail pane at 64rem (pages.css)
+ */
+:root {
+  color-scheme: dark;
+
+  /* type */
+  --font-sans: "IBM Plex Sans", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Mono", Consolas, ui-monospace, monospace;
+  --fs-2xs: 0.6875rem; /* 11px overlines */
+  --fs-xs: 0.75rem; /* 12px labels, table headers */
+  --fs-sm: 0.8125rem; /* 13px controls, tables */
+  --fs-md: 0.875rem; /* 14px body */
+  --fs-lg: 1rem; /* 16px */
+  --fs-xl: 1.25rem; /* 20px page titles */
+  --fs-2xl: 1.5rem; /* 24px status word */
+  --lh-tight: 1.25;
+  --lh-base: 1.5;
+  --lh-loose: 1.65;
+
+  /* space, 4px base */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+
+  /* shape and motion */
+  --r-1: 2px;
+  --r-2: 3px;
+  --r-3: 6px;
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --control-h: 2rem;
+  --sidebar-w: 14.5rem;
+  --content-max: 92rem;
+
+  /* surfaces (dark) */
+  --c-bg: #0b1016;
+  --c-sunken: #080c11;
+  --c-panel: #101720;
+  --c-hover: #162030;
+  --c-inset: #0c1219;
+  --c-line: #1c2734;
+  --c-line-strong: #2b3a4d;
+  --c-control: #64788f;
+
+  /* text */
+  --c-text: #dbe4ee;
+  --c-text-2: #a2b3c5;
+  --c-text-3: #8093a8;
+
+  /* semantic */
+  --c-accent: #3cc6b8;
+  --c-accent-hover: #67dacd;
+  --c-accent-ink: #04211e;
+  --c-accent-wash: #163035;
+  --c-threat: #ff7478;
+  --c-threat-fill: #e5484d;
+  --c-threat-wash: #31242c;
+  --c-threat-solid: #b8282f; /* solid red fills: buttons, critical tags */
+  --c-threat-ink: #ffffff; /* text on solid red fills */
+  --c-selected: #14272e; /* selected row or option, light enough for muted text */
+  --c-warn: #eaaa43;
+  --c-warn-wash: #2f2c25;
+  --c-ok: #4dc58e;
+  --c-ok-wash: #192f2f;
+  --c-series-b: #8aa0b8; /* secondary series next to the accent */
+  --c-focus: #67dacd;
+  --ramp-accent: #177a72; /* end of the heatmap ramps, see theme.ts */
+  --ramp-warn: #8c6211;
+
+  --shadow-overlay: 0 8px 24px rgb(0 0 0 / 0.45);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --c-bg: #e9eef3;
+  --c-sunken: #dfe6ed;
+  --c-panel: #f4f7fa;
+  --c-hover: #e6edf3;
+  --c-inset: #edf2f6;
+  --c-line: #d0d9e2;
+  --c-line-strong: #b5c1ce;
+  --c-control: #6f8296;
+
+  --c-text: #0f1923;
+  --c-text-2: #3d4f63;
+  --c-text-3: #4d6177;
+
+  --c-accent: #066860;
+  --c-accent-hover: #04504a;
+  --c-accent-ink: #ffffff;
+  --c-accent-wash: #d3e3e4;
+  --c-threat: #b4222a;
+  --c-threat-fill: #c9323a;
+  --c-threat-wash: #ebd9dd;
+  --c-threat-solid: #b4222a;
+  --c-threat-ink: #ffffff;
+  --c-selected: #dfeaec;
+  --c-warn: #85520a;
+  --c-warn-wash: #e4e0d8;
+  --c-ok: #14664a;
+  --c-ok-wash: #d5e3e1;
+  --c-series-b: #6a7f95;
+  --c-focus: #066860;
+  --ramp-accent: #4fb0a7;
+  --ramp-warn: #dca233;
+
+  --shadow-overlay: 0 8px 24px rgb(15 25 35 / 0.18);
+}

@@ -1,0 +1,9 @@
+,ceiling,"XGBoost (family, random)","XGBoost (family, group)"
+BENIGN,1.0,1.0,1.0
+MSSQL,0.956,0.976,0.973
+NTP,0.998,0.998,0.996
+NetBIOS-Portmap,0.984,0.983,0.956
+Reflection-Amp,0.98,0.989,0.985
+Syn,0.865,0.795,0.927
+TFTP,0.996,0.995,0.998
+UDP-Family,0.951,0.911,0.964

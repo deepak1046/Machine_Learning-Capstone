@@ -1,0 +1,322 @@
+{
+  "identifier_columns_excluded": [
+    "Flow ID",
+    "Source IP",
+    "Destination IP",
+    "Timestamp"
+  ],
+  "label_columns": [
+    "Label",
+    "Label_Encoded"
+  ],
+  "numeric_feature_columns": [
+    "Source Port",
+    "Destination Port",
+    "Protocol",
+    "Flow Duration",
+    "Total Fwd Packets",
+    "Total Backward Packets",
+    "Total Length of Fwd Packets",
+    "Total Length of Bwd Packets",
+    "Fwd Packet Length Max",
+    "Fwd Packet Length Min",
+    "Fwd Packet Length Mean",
+    "Fwd Packet Length Std",
+    "Bwd Packet Length Max",
+    "Bwd Packet Length Min",
+    "Bwd Packet Length Mean",
+    "Bwd Packet Length Std",
+    "Flow Bytes/s",
+    "Flow Packets/s",
+    "Flow IAT Mean",
+    "Flow IAT Std",
+    "Flow IAT Max",
+    "Flow IAT Min",
+    "Fwd IAT Total",
+    "Fwd IAT Mean",
+    "Fwd IAT Std",
+    "Fwd IAT Max",
+    "Fwd IAT Min",
+    "Bwd IAT Total",
+    "Bwd IAT Mean",
+    "Bwd IAT Std",
+    "Bwd IAT Max",
+    "Bwd IAT Min",
+    "Fwd PSH Flags",
+    "Bwd PSH Flags",
+    "Fwd URG Flags",
+    "Bwd URG Flags",
+    "Fwd Header Length",
+    "Bwd Header Length",
+    "Fwd Packets/s",
+    "Bwd Packets/s",
+    "Min Packet Length",
+    "Max Packet Length",
+    "Packet Length Mean",
+    "Packet Length Std",
+    "Packet Length Variance",
+    "FIN Flag Count",
+    "SYN Flag Count",
+    "RST Flag Count",
+    "PSH Flag Count",
+    "ACK Flag Count",
+    "URG Flag Count",
+    "CWE Flag Count",
+    "ECE Flag Count",
+    "Down/Up Ratio",
+    "Average Packet Size",
+    "Avg Fwd Segment Size",
+    "Avg Bwd Segment Size",
+    "Fwd Header Length.1",
+    "Fwd Avg Bytes/Bulk",
+    "Fwd Avg Packets/Bulk",
+    "Fwd Avg Bulk Rate",
+    "Bwd Avg Bytes/Bulk",
+    "Bwd Avg Packets/Bulk",
+    "Bwd Avg Bulk Rate",
+    "Subflow Fwd Packets",
+    "Subflow Fwd Bytes",
+    "Subflow Bwd Packets",
+    "Subflow Bwd Bytes",
+    "Init_Win_bytes_forward",
+    "Init_Win_bytes_backward",
+    "act_data_pkt_fwd",
+    "min_seg_size_forward",
+    "Active Mean",
+    "Active Std",
+    "Active Max",
+    "Active Min",
+    "Idle Mean",
+    "Idle Std",
+    "Idle Max",
+    "Idle Min",
+    "Inbound"
+  ],
+  "redundant_pairs_flagged": [
+    {
+      "Feature A": "Total Fwd Packets",
+      "Feature B": "Subflow Fwd Packets",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Total Backward Packets",
+      "Feature B": "Subflow Bwd Packets",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Total Length of Fwd Packets",
+      "Feature B": "Subflow Fwd Bytes",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Total Length of Bwd Packets",
+      "Feature B": "Subflow Bwd Bytes",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Bwd Packet Length Mean",
+      "Feature B": "Avg Bwd Segment Size",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Fwd Header Length",
+      "Feature B": "Fwd Header Length.1",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Fwd PSH Flags",
+      "Feature B": "RST Flag Count",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Fwd Packet Length Mean",
+      "Feature B": "Avg Fwd Segment Size",
+      "Correlation": 1.0
+    },
+    {
+      "Feature A": "Flow Packets/s",
+      "Feature B": "Fwd Packets/s",
+      "Correlation": 0.9997529999146675
+    },
+    {
+      "Feature A": "Fwd Packet Length Min",
+      "Feature B": "Min Packet Length",
+      "Correlation": 0.9996807373024715
+    },
+    {
+      "Feature A": "Flow Duration",
+      "Feature B": "Fwd IAT Total",
+      "Correlation": 0.998805770880527
+    },
+    {
+      "Feature A": "Packet Length Mean",
+      "Feature B": "Avg Fwd Segment Size",
+      "Correlation": 0.997394896927695
+    },
+    {
+      "Feature A": "Fwd Packet Length Mean",
+      "Feature B": "Packet Length Mean",
+      "Correlation": 0.997394896927695
+    },
+    {
+      "Feature A": "Packet Length Mean",
+      "Feature B": "Average Packet Size",
+      "Correlation": 0.9967828737839697
+    },
+    {
+      "Feature A": "Fwd Packet Length Min",
+      "Feature B": "Avg Fwd Segment Size",
+      "Correlation": 0.9965290721721334
+    },
+    {
+      "Feature A": "Fwd Packet Length Min",
+      "Feature B": "Fwd Packet Length Mean",
+      "Correlation": 0.9965290721721334
+    },
+    {
+      "Feature A": "Flow IAT Min",
+      "Feature B": "Fwd IAT Min",
+      "Correlation": 0.9962493598422982
+    },
+    {
+      "Feature A": "Flow IAT Max",
+      "Feature B": "Fwd IAT Max",
+      "Correlation": 0.9962216530804415
+    },
+    {
+      "Feature A": "Fwd Packet Length Mean",
+      "Feature B": "Min Packet Length",
+      "Correlation": 0.9961699071800992
+    },
+    {
+      "Feature A": "Min Packet Length",
+      "Feature B": "Avg Fwd Segment Size",
+      "Correlation": 0.9961699071800992
+    },
+    {
+      "Feature A": "Fwd Packet Length Mean",
+      "Feature B": "Average Packet Size",
+      "Correlation": 0.9955799442180928
+    },
+    {
+      "Feature A": "Average Packet Size",
+      "Feature B": "Avg Fwd Segment Size",
+      "Correlation": 0.9955799442180928
+    },
+    {
+      "Feature A": "Min Packet Length",
+      "Feature B": "Average Packet Size",
+      "Correlation": 0.9949887086160544
+    },
+    {
+      "Feature A": "Fwd Packet Length Min",
+      "Feature B": "Average Packet Size",
+      "Correlation": 0.9949345933724775
+    },
+    {
+      "Feature A": "Fwd Packet Length Min",
+      "Feature B": "Packet Length Mean",
+      "Correlation": 0.993759677049436
+    },
+    {
+      "Feature A": "Min Packet Length",
+      "Feature B": "Packet Length Mean",
+      "Correlation": 0.9937434601862037
+    },
+    {
+      "Feature A": "Idle Mean",
+      "Feature B": "Idle Min",
+      "Correlation": 0.986003119047602
+    },
+    {
+      "Feature A": "Flow IAT Std",
+      "Feature B": "Fwd IAT Std",
+      "Correlation": 0.9846446565935791
+    },
+    {
+      "Feature A": "Idle Mean",
+      "Feature B": "Idle Max",
+      "Correlation": 0.9840871755240327
+    },
+    {
+      "Feature A": "Fwd Packet Length Max",
+      "Feature B": "Packet Length Mean",
+      "Correlation": 0.9809680762653871
+    },
+    {
+      "Feature A": "Fwd IAT Max",
+      "Feature B": "Idle Max",
+      "Correlation": 0.9809064597454459
+    },
+    {
+      "Feature A": "Fwd Packet Length Max",
+      "Feature B": "Fwd Packet Length Mean",
+      "Correlation": 0.9804620910266753
+    },
+    {
+      "Feature A": "Fwd Packet Length Max",
+      "Feature B": "Avg Fwd Segment Size",
+      "Correlation": 0.9804620910266753
+    },
+    {
+      "Feature A": "Flow IAT Max",
+      "Feature B": "Idle Max",
+      "Correlation": 0.9802547237742656
+    },
+    {
+      "Feature A": "Fwd Packet Length Max",
+      "Feature B": "Average Packet Size",
+      "Correlation": 0.9759025387050061
+    },
+    {
+      "Feature A": "Total Backward Packets",
+      "Feature B": "Total Length of Bwd Packets",
+      "Correlation": 0.9747217900317199
+    },
+    {
+      "Feature A": "Total Backward Packets",
+      "Feature B": "Subflow Bwd Bytes",
+      "Correlation": 0.9747217900317199
+    },
+    {
+      "Feature A": "Total Length of Bwd Packets",
+      "Feature B": "Subflow Bwd Packets",
+      "Correlation": 0.9747217900317199
+    },
+    {
+      "Feature A": "Subflow Bwd Packets",
+      "Feature B": "Subflow Bwd Bytes",
+      "Correlation": 0.9747217900317199
+    },
+    {
+      "Feature A": "Flow IAT Mean",
+      "Feature B": "Fwd IAT Mean",
+      "Correlation": 0.9719012162627417
+    },
+    {
+      "Feature A": "Fwd Packet Length Max",
+      "Feature B": "Fwd Packet Length Min",
+      "Correlation": 0.9692921346791913
+    },
+    {
+      "Feature A": "Fwd Packet Length Max",
+      "Feature B": "Min Packet Length",
+      "Correlation": 0.968887801492473
+    },
+    {
+      "Feature A": "Fwd IAT Max",
+      "Feature B": "Idle Mean",
+      "Correlation": 0.9650452169691911
+    },
+    {
+      "Feature A": "Flow IAT Max",
+      "Feature B": "Idle Mean",
+      "Correlation": 0.9647499630757604
+    },
+    {
+      "Feature A": "Flow IAT Std",
+      "Feature B": "Fwd IAT Mean",
+      "Correlation": 0.9584562090102552
+    }
+  ]
+}

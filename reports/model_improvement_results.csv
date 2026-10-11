@@ -1,0 +1,5 @@
+split,model,macro_f1,accuracy,note
+random,XGBoost (baseline),0.7907,0.787,"original, n_estimators=300 fixed"
+random,XGBoost_tuned,0.7903,0.7862,"up to 1000 rounds, early-stopped at 433, depth 10"
+random,LightGBM,0.794,0.7905,"up to 1000 rounds, early-stopped at 117"
+random,CatBoost,,,"ABANDONED after ~85 min with no result, CPU-only multiclass too slow on this machine"
