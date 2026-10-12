@@ -1,0 +1,5 @@
+variant,macro_f1,accuracy,epochs,minutes
+control,0.6655,0.6999,8,14.8
+log,0.7385,0.7515,13,24.4
+ports,0.7246,0.7488,14,31.3
+log+ports,0.7605,0.7713,15,30.9

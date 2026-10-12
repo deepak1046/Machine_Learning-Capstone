@@ -2,6 +2,8 @@ import keras
 import tensorflow as tf
 from keras import layers
 
+from src.preprocessing.neural import N_PORT_BUCKETS
+
 
 class AttentionPooling(layers.Layer):
     """Additive attention pooling: learns a per-timestep importance score and
@@ -17,7 +19,9 @@ class AttentionPooling(layers.Layer):
         return tf.reduce_sum(x * weights, axis=1)  # (batch, channels)
 
 
-def build_cnn_bilstm_attention(n_features: int, n_classes: int, pool: bool = False) -> keras.Model:
+def build_cnn_bilstm_attention(
+    n_features: int, n_classes: int, pool: bool = False, port_embedding: bool = False
+) -> keras.Model:
     """CNN front-end (local feature smoothing) feeding a BiLSTM (sequential
     dependencies across the feature sequence) with additive attention pooling,
     then a classification head.
@@ -28,8 +32,12 @@ def build_cnn_bilstm_attention(n_features: int, n_classes: int, pool: bool = Fal
     confusable classes (NetBIOS/Portmap, DNS/LDAP/SNMP) depend on -- those are
     exactly the classes where this model underperformed XGBoost. `pool=True`
     restores the old 4x-downsampled behavior for comparison.
+
+    `port_embedding=True` (v2) adds a second input, "ports": the two port buckets from
+    src.preprocessing.neural.port_buckets, embedded and concatenated with the attention-pooled
+    vector. Ports name the service a reflection attack abuses, so they are categories, not magnitudes.
     """
-    inputs = layers.Input(shape=(n_features, 1))
+    inputs = layers.Input(shape=(n_features, 1), name="flow")
 
     x = layers.Conv1D(64, kernel_size=3, padding="same", activation="relu")(inputs)
     x = layers.BatchNormalization()(x)
@@ -43,8 +51,15 @@ def build_cnn_bilstm_attention(n_features: int, n_classes: int, pool: bool = Fal
     x = layers.Bidirectional(layers.LSTM(64, return_sequences=True))(x)
     x = AttentionPooling()(x)
 
+    model_inputs = [inputs]
+    if port_embedding:
+        port_input = layers.Input(shape=(2,), dtype="int32", name="ports")
+        embedded = layers.Flatten()(layers.Embedding(N_PORT_BUCKETS, 8)(port_input))
+        x = layers.Concatenate()([x, embedded])
+        model_inputs.append(port_input)
+
     x = layers.Dense(128, activation="relu")(x)
     x = layers.Dropout(0.3)(x)
     outputs = layers.Dense(n_classes, activation="softmax")(x)
 
-    return keras.Model(inputs, outputs, name="cnn_bilstm_attention")
+    return keras.Model(model_inputs if port_embedding else inputs, outputs, name="cnn_bilstm_attention")

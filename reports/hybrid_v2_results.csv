@@ -1,0 +1,3 @@
+split,model,macro_f1,balanced_accuracy,accuracy,epochs,seconds
+group,CNN-BiLSTM-Attention (log + ports),0.744298097925707,0.7459464793649808,0.7681653272378376,15,7020.0
+random,CNN-BiLSTM-Attention (log + ports),0.770082655311949,0.7799129389036987,0.7666540218241644,10,4573.3
