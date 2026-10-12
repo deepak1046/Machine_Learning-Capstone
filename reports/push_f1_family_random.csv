@@ -1,0 +1,7 @@
+task,split,model,macro_f1,accuracy
+family,random,LightGBM,0.9557,0.9515
+family,random,LightGBM + engineered features,0.9554,0.9512
+family,random,XGBoost (train minus val),0.9553,0.9512
+family,random,Ensemble (XGB + LGB + LGB-eng),0.9558,0.9517
+family,random,LightGBM + eng + tuned offsets,0.9698,0.97
+family,random,Ensemble + tuned offsets,0.9699,0.9701

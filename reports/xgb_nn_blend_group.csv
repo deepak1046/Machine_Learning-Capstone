@@ -1,0 +1,4 @@
+model,macro_f1,accuracy
+XGBoost,0.7828,0.8016
+Network v2 (raw),0.7443,0.7682
+Average of both,0.7658,0.7892
