@@ -41,10 +41,9 @@ TOP_FEATURES = 12
 
 MODEL_BLURBS = {
     "xgb13": "300 gradient-boosted trees. The strongest model on the full 13-class task.",
-    "xgb8": "The same trees, with DNS/LDAP/SNMP, NetBIOS/Portmap and SSDP/UDP/UDPLag merged into families.",
-    "hybrid13": "The proposed network: 1-D convolutions, a bidirectional LSTM and attention pooling.",
+    "xgb8": "The same trees, with DNS/LDAP/SNMP, NetBIOS/Portmap and SSDP/UDP/UDPLag merged into families, and a class-offset decision rule tuned on held-out training data.",
+    "hybrid13": "The proposed network: 1-D convolutions, a bidirectional LSTM and attention pooling, on log-scaled inputs with a port embedding and a tuned class-offset decision rule.",
 }
-SUMMARY_ROW = {"xgb13": "XGBoost", "hybrid13": "CNN-BiLSTM-Attention (un-pooled)"}
 
 
 def _warm_models() -> None:
@@ -95,26 +94,26 @@ def _sample_frame() -> pd.DataFrame:
 def _heldout_scores() -> dict:
     """Group-split test scores and ceilings per served model, read from the saved reports."""
     thirteen = pd.read_csv(REPORTS / "final_summary_13class.csv", index_col=0)
-    family = pd.read_csv(REPORTS / "final_summary_family.csv", index_col=0)
     ceilings = pd.read_csv(REPORTS / "ceiling_summary.csv", index_col=0)
+    offsets = pd.read_csv(REPORTS / "xgb_offsets_results.csv").set_index("task")
+    network = pd.read_csv(REPORTS / "hybrid_v2_offsets_results.csv").set_index("split").loc["group"]
 
-    scores = {}
-    for key, row in SUMMARY_ROW.items():
-        ceiling = ceilings.loc["13-class (attack type)"]
-        scores[key] = {
-            "macro_f1": _finite(thirteen.loc[row, "macro-F1 | group"]),
-            "accuracy": _finite(thirteen.loc[row, "accuracy | group"]),
+    ceiling13, ceiling8 = ceilings.loc["13-class (attack type)"], ceilings.loc["8-class (attack family)"]
+
+    def entry(macro_f1, accuracy, ceiling):
+        return {
+            "macro_f1": _finite(macro_f1),
+            "accuracy": _finite(accuracy),
             "ceiling_macro_f1": _finite(ceiling["macro_f1"]),
             "ceiling_accuracy": _finite(ceiling["accuracy"]),
         }
-    ceiling = ceilings.loc["8-class (attack family)"]
-    scores["xgb8"] = {
-        "macro_f1": _finite(family.loc["group", "macro-F1"]),
-        "accuracy": _finite(family.loc["group", "accuracy"]),
-        "ceiling_macro_f1": _finite(ceiling["macro_f1"]),
-        "ceiling_accuracy": _finite(ceiling["accuracy"]),
+
+    return {
+        "xgb13": entry(thirteen.loc["XGBoost", "macro-F1 | group"], thirteen.loc["XGBoost", "accuracy | group"], ceiling13),
+        # the family model applies class offsets tuned on a validation slice of the training data
+        "xgb8": entry(offsets.loc["family", "test_macro_f1_offsets"], offsets.loc["family", "test_accuracy_offsets"], ceiling8),
+        "hybrid13": entry(network["test_macro_f1_offsets"], network["test_accuracy_offsets"], ceiling13),
     }
-    return scores
 
 
 @app.get("/api/health")
@@ -268,7 +267,8 @@ def explain(req: ExplainRequest):
             for name, score in strongest.items()
         ],
         "other_features": float(scores.sum() - strongest.sum()),
-        "bias": float(bias[0]),
+        # the class offset (family model) is part of the decision score, so it joins the base value
+        "bias": float(bias[0]) + (float(model.offsets[predicted]) if model.offsets is not None else 0.0),
     }
 
 

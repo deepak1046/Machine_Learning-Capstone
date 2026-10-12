@@ -181,7 +181,7 @@ export function ResultsPage({ models }: { models: ModelInfo[] }) {
   const ceiling13 = data.ceilings.find((c) => c.classes === 13);
   const ceiling8 = data.ceilings.find((c) => c.classes === 8 && c.rows > 1e6);
   const xgb = data.thirteen_class.find((r) => r.model === "XGBoost");
-  const net = data.thirteen_class.find((r) => r.model === "CNN-BiLSTM-Attention (un-pooled)");
+  const net = data.thirteen_class.find((r) => r.model === "CNN-BiLSTM-Attention (log + ports)");
   const best = (key: "macro_f1_random" | "macro_f1_group") =>
     [...data.thirteen_class].sort((a, b) => (b[key] ?? 0) - (a[key] ?? 0))[0];
 
@@ -281,7 +281,7 @@ export function ResultsPage({ models }: { models: ModelInfo[] }) {
               ]}
               ceiling={ceiling13.macro_f1}
               ceilingLabel="behavior-only ceiling"
-              labelRows={[best("macro_f1_random").model, "CNN-BiLSTM-Attention (un-pooled)"]}
+              labelRows={[best("macro_f1_random").model, "CNN-BiLSTM-Attention (log + ports)"]}
               labelWidth={230}
               ariaLabel="Macro-F1 of each model on the 13-class task, random and group split, against the ceiling"
             />
@@ -298,8 +298,8 @@ export function ResultsPage({ models }: { models: ModelInfo[] }) {
       <Section title="Per-class weaknesses">
         <div className="prose">
           <p>
-            F1 per class for the 13-class models. DNS, LDAP, NetBIOS, Portmap, SSDP and UDP are weak for every model, the same
-            classes the ceiling marks as inherently confusable.
+            F1 per class for the 13-class models. On the group split, DNS, LDAP, Portmap, SSDP and UDP are weak for every
+            model, the classes the ceiling marks as inherently confusable.
           </p>
         </div>
         <Panel level={3} title="F1 by class">
@@ -311,10 +311,12 @@ export function ResultsPage({ models }: { models: ModelInfo[] }) {
         <div className="prose">
           <p>
             Merging the confusable attack types (DNS, LDAP and SNMP; NetBIOS and Portmap; SSDP, UDP and UDPLag) removes the
-            label ambiguity at its source and lifts the ceiling to {f3(ceiling8?.macro_f1)}. The same XGBoost then scores:
+            label ambiguity at its source and lifts the ceiling to {f3(ceiling8?.macro_f1)}. The same XGBoost then scores the
+            first two rows below. The last three rows add a tuned decision rule: per-class offsets fitted on a validation
+            slice of the training data, which re-balances the predictions that class-balanced training skews.
           </p>
         </div>
-        <Panel level={3} title="XGBoost on 8 families" flush>
+        <Panel level={3} title="Scores on 8 families" flush>
           <TableScroll label="Family model scores">
             <table className="dt">
               <thead>

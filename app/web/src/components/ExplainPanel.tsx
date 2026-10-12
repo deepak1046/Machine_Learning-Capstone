@@ -162,7 +162,7 @@ export function ExplainPanel({ model, flow, groupOf, familyModel, onUseFamilyMod
             />
             <p className="hint">
               TreeSHAP contributions in log-odds: how far each feature moved the model's score for {explanation.predicted}.
-              Together with a base score of {explanation.bias.toFixed(2)} they add up to the model's raw output.
+              Together with a base score of {explanation.bias.toFixed(2)} (which includes the model's class offset, if it has one) they add up to the model's decision score.
             </p>
           </>
         )}

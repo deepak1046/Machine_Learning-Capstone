@@ -1,7 +1,7 @@
 """Inference for the trained flow classifiers.
 
 Mirrors the training pipeline exactly: raw CICFlowMeter columns -> the 60 selected
-features -> (neural net only) the train-fitted imputer + scaler -> model -> per-class scores.
+features -> (neural net only) the train-fitted preprocessor -> model -> per-class scores.
 All served models were trained on the group split (behaviorally identical flows kept on one
 side), so held-out flows are genuinely unseen behavior.
 """
@@ -33,16 +33,20 @@ class ModelSpec:
     file: str
     classes: tuple
     preprocessor: str | None = None
+    # per-class log-probability offsets (JSON list in class order), tuned for macro-F1 on a validation
+    # slice of the training data; shifts the decision rule, not the trees
+    offsets: str | None = None
 
 
 MODEL_SPECS = {
     "xgb13": ModelSpec("xgb13", "XGBoost", "tree", "attack type", "XGBoost_group.joblib", tuple(CLASSES)),
     "xgb8": ModelSpec(
-        "xgb8", "XGBoost", "tree", "attack family", "XGBoost_family_group.joblib", tuple(FAMILY_CLASSES)
+        "xgb8", "XGBoost", "tree", "attack family", "XGBoost_family_group_v2.joblib", tuple(FAMILY_CLASSES),
+        offsets="offsets_xgb8_group.json",
     ),
     "hybrid13": ModelSpec(
-        "hybrid13", "CNN-BiLSTM-Attention", "neural", "attack type", "cnn_bilstm_attention_group.keras",
-        tuple(CLASSES), preprocessor="hybrid_preprocessor_group.joblib",
+        "hybrid13", "CNN-BiLSTM-Attention", "neural", "attack type", "cnn_bilstm_attention_v2_group.keras",
+        tuple(CLASSES), preprocessor="hybrid_v2_preprocessor_group.joblib", offsets="offsets_hybrid13_group.json",
     ),
 }
 
@@ -51,6 +55,9 @@ class FlowModel:
     def __init__(self, spec: ModelSpec):
         self.spec = spec
         self.classes = list(spec.classes)
+        self.offsets = (
+            np.asarray(json.loads((MODELS_DIR / spec.offsets).read_text()), dtype="float64") if spec.offsets else None
+        )
         path = MODELS_DIR / spec.file
         if spec.kind == "tree":
             self.estimator = joblib.load(path)
@@ -66,11 +73,21 @@ class FlowModel:
             self._lock = threading.Lock()
 
     def predict_proba(self, X: pd.DataFrame, batch_size: int = 2048) -> np.ndarray:
+        proba = self._raw_proba(X, batch_size)
+        if self.offsets is None:
+            return proba
+        shifted = np.log(np.clip(proba, 1e-9, 1.0)) + self.offsets
+        shifted = np.exp(shifted - shifted.max(axis=1, keepdims=True))
+        return shifted / shifted.sum(axis=1, keepdims=True)
+
+    def _raw_proba(self, X: pd.DataFrame, batch_size: int = 2048) -> np.ndarray:
         if self.spec.kind == "tree":
             return self.estimator.predict_proba(X)
         Z = self.preprocessor.transform(X)
-        with self._lock:
-            return self.estimator.predict(Z.reshape(len(Z), Z.shape[1], 1), batch_size=batch_size, verbose=0)
+        if not isinstance(Z, dict):  # v1 network: one scaled array, read as a sequence of features
+            Z = Z.reshape(len(Z), Z.shape[1], 1)
+        with self._lock:  # v2 network: {"flow": ..., "ports": ...} from src.preprocessing.neural
+            return self.estimator.predict(Z, batch_size=batch_size, verbose=0)
 
 
 _models: dict = {}

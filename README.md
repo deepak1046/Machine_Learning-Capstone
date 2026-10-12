@@ -12,7 +12,8 @@ Machine_Learning-Capstone/
 │   ├── raw/
 │   ├── processed/
 │
-├── notebooks/        01-07, one per milestone (see below)
+├── notebooks/        01-09, one per milestone (see below)
+├── experiments/      scripts behind the accuracy experiments
 ├── src/
 │   ├── preprocessing/
 │   ├── models/       hybrid.py (network), predictor.py (serving)
@@ -38,9 +39,30 @@ Machine_Learning-Capstone/
 2. `02_data_preprocessing` - clean, standardize labels, merge to Parquet
 3. `03_eda` - class balance, missing values, redundancy
 4. `04_baseline_models` (+ `04b_base_paper_reproduction`) - baselines, behavior-only ceiling, base-paper check
-5. `05_hybrid_model` - CNN-BiLSTM-Attention
+5. `05_hybrid_model` - CNN-BiLSTM-Attention (original input handling); `05b_hybrid_v2` - the same network with log-scaled
+   inputs and a port embedding, which closes most of the gap to XGBoost
 6. `06_final_evaluation` - every result against its ceiling
 7. `07_serving_prep` - saves what the app needs and checks the served models reproduce the reported scores
+8. `08_explainability` - global SHAP for the XGBoost model
+9. `09_attention_weights` - what the network's attention layer looks at, compared with SHAP
+
+`experiments/` holds the scripts behind the later accuracy work (learning curve, input-handling test for the network,
+class-offset tuning); their results are in `reports/` (`learning_curve_group.csv`, `nn_inputs_experiment.csv`,
+`push_f1_*.csv`, `xgb_offsets_results.csv`).
+
+## Main results (13 attack types, group split, macro-F1 / accuracy)
+
+| Model | Macro-F1 | Accuracy |
+|---|---|---|
+| Behavior-only ceiling | 0.808 | 0.809 |
+| XGBoost (served) | 0.783 | 0.802 |
+| LightGBM + features + class offsets | 0.792 | 0.807 |
+| CNN-BiLSTM-Attention v2 (served) | 0.744 | 0.768 |
+| CNN-BiLSTM-Attention v1 | 0.690 | 0.718 |
+
+Merged into 8 attack families the served XGBoost with class offsets reaches 0.981 / 0.981 (ceiling 0.966).
+A "class offset" shifts each class's log-probability by a constant tuned for macro-F1 on a validation slice of the
+training data; the test set is never used to choose it.
 
 ## Running the app
 
