@@ -1,0 +1,15 @@
+class,spearman
+all classes,0.41
+BENIGN,0.36
+DNS,0.39
+LDAP,0.32
+MSSQL,0.4
+NTP,0.44
+NetBIOS,0.02
+Portmap,0.1
+SNMP,0.27
+SSDP,0.32
+Syn,0.01
+TFTP,0.5
+UDP,0.3
+UDPLag,0.22
