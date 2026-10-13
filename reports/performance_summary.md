@@ -16,6 +16,9 @@ Source: `notebooks/10_performance_metrics.ipynb` (tables in `reports/performance
 | CNN-BiLSTM-Attention v2 | 0.744 [0.720, 0.769] | 0.768 [0.729, 0.807] | 0.748 | 0.766 | 0.746 |
 | CNN-BiLSTM-Attention v1 | 0.690 [0.665, 0.705] | 0.718 [0.685, 0.756] | 0.695 | 0.705 | 0.698 |
 | Logistic regression | 0.686 [0.668, 0.698] | 0.697 [0.671, 0.726] | 0.671 | 0.693 | 0.689 |
+| Base paper's CNN, 10 epochs | 0.686 [0.660, 0.702] | 0.716 [0.683, 0.753] | | | |
+| Base paper's LSTM, 1 epoch | 0.634 [0.598, 0.660] | 0.664 [0.623, 0.700] | | | |
+| Base paper's CNN, 1 epoch | 0.625 [0.595, 0.652] | 0.673 [0.630, 0.712] | | | |
 
 ## 13 attack types, random split
 
@@ -24,6 +27,9 @@ Source: `notebooks/10_performance_metrics.ipynb` (tables in `reports/performance
 | LightGBM | 0.794 [0.774, 0.808] | 0.790 [0.765, 0.818] |
 | XGBoost | 0.791 [0.770, 0.805] | 0.787 [0.761, 0.815] |
 | CNN-BiLSTM-Attention v2 | 0.770 [0.745, 0.789] | 0.767 [0.732, 0.799] |
+| Base paper's CNN, 10 epochs | 0.676 [0.657, 0.693] | 0.718 [0.679, 0.754] |
+| Base paper's CNN, 1 epoch | 0.648 [0.630, 0.664] | 0.694 [0.660, 0.733] |
+| Base paper's LSTM, 1 epoch | 0.615 [0.584, 0.640] | 0.667 [0.622, 0.709] |
 
 ## 8 attack families
 
@@ -47,6 +53,16 @@ Paired bootstrap of macro-F1 differences on the group split (`reports/performanc
 - **Class offsets on the network are not significant**: +0.004 [-0.005, 0.017] (interval includes zero). On the family task they are: +0.007 [0.005, 0.009].
 - **LightGBM vs XGBoost (random split)**: +0.003 [0.002, 0.005]: real but too small to matter.
 - Intervals on the 13-class group split are about plus or minus 0.015, so differences smaller than that between two models should not be reported as improvements. This applies to the 0.792 macro-F1 of LightGBM with engineered features and offsets from the earlier experiments (`reports/push_group_f1_results.json`): those models were not saved and are not in this report, so that figure has no interval.
+
+## The base paper's models on our 13-class task
+
+The paper has no 13-class result, so its recipe was run on our task (`experiments/paper_models_13class.py`): its CNN and LSTM architectures, up to 50,000 training rows per class (650,000 rows), standard scaling, Adam at 1e-3, batch 64, 1 epoch as in the paper (10 epochs for the CNN as a check), scored on the full test split of each protocol.
+
+- **Our network beats them clearly.** Group split, macro-F1 difference of v2 + offsets over the paper's CNN (1 epoch): 0.124 [0.092, 0.158]; over the paper's LSTM: 0.118 [0.083, 0.157]; over the paper's CNN trained for 10 epochs: 0.067 [0.041, 0.094].
+- **XGBoost beats them by more**: 0.158 [0.129, 0.192] over the 1-epoch CNN, 0.101 [0.075, 0.127] over the 10-epoch CNN.
+- **The paper's best model is only as good as our first network and logistic regression.** The 10-epoch CNN ties v1 (difference 0.005 [-0.000, 0.011]) and logistic regression (0.002 [-0.016, 0.020]). The v2 input fix is what moves a network past that.
+- The paper's CNN and LSTM are not distinguishable at 1 epoch (difference -0.006 [-0.021, 0.009]).
+- Attack versus benign is still easy for them (detection 99.8% to 99.99%, false positives 0.1% to 0.35%), so their weakness is telling the attack types apart.
 
 ## Where the 13-class errors are (group split, F1)
 

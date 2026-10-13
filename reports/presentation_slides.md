@@ -77,6 +77,7 @@ Corrected against what the project actually does, with the final results. Number
 
 - Ceiling: about 63% of flows are identical to a flow with a different label (for example DNS vs LDAP vs SNMP), so no model on flow features can exceed about 0.81
 - XGBoost reaches about 97% of the ceiling; more rows or heavier tuning add at most 0.01 (learning curve: 25% of the rows already gives the same score)
+- The base paper's CNN and LSTM, trained their way on our 13 classes: macro-F1 0.63 to 0.69 (1 epoch to 10 epochs), about 0.06 to 0.12 below our network and 0.10 to 0.16 below XGBoost (all differences significant)
 - Averaging XGBoost with the network is worse than XGBoost alone (0.766), so the weaker model does not help
 
 **8 attack families (merging the confusable types)**

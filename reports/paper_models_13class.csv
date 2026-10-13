@@ -1,0 +1,7 @@
+split,model,train_rows,macro_f1,accuracy,minutes
+group,Paper CNN 1 epoch,650000,0.6253,0.6732,0.3
+group,Paper LSTM 1 epoch,650000,0.6337,0.6643,6.2
+group,Paper CNN 10 epochs,650000,0.6856,0.7164,2.9
+random,Paper CNN 1 epoch,650000,0.6475,0.6941,0.4
+random,Paper LSTM 1 epoch,650000,0.6146,0.6668,8.2
+random,Paper CNN 10 epochs,650000,0.6756,0.7178,4.2

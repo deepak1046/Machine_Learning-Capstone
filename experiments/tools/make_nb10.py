@@ -28,7 +28,8 @@ NAMES = {"13": list(CLASSES), "family": list(FAMILY_CLASSES)}
 DISPLAY = {"xgboost": "XGBoost", "xgboost__no_ports": "XGBoost (no ports)", "logistic_regression": "Logistic regression",
            "cnn_bilstm_attention_v1": "CNN-BiLSTM-Attention v1", "cnn_bilstm_attention_v2": "CNN-BiLSTM-Attention v2",
            "cnn_bilstm_attention_v2___offsets": "CNN-BiLSTM-Attention v2 + offsets", "xgboost___offsets": "XGBoost + offsets",
-           "lightgbm": "LightGBM"}
+           "lightgbm": "LightGBM", "paper_cnn_1_epoch": "Paper CNN (1 epoch)", "paper_lstm_1_epoch": "Paper LSTM (1 epoch)",
+           "paper_cnn_10_epochs": "Paper CNN (10 epochs)"}
 draws = bootstrap_draws(repeats=1000, seed=0)
 files = sorted(PRED.glob("*.npz"))
 print(len(files), "prediction files")''')
