@@ -1,0 +1,14 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791879391.826762    2604 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791879393.584849    2604 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1791879397.747172    2604 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+{'split': 'group', 'model': 'Paper CNN 1 epoch', 'train_rows': 650000, 'macro_f1': 0.6253, 'accuracy': 0.6732, 'minutes': 0.3}
+{'split': 'group', 'model': 'Paper LSTM 1 epoch', 'train_rows': 650000, 'macro_f1': 0.6337, 'accuracy': 0.6643, 'minutes': 6.2}
+{'split': 'group', 'model': 'Paper CNN 10 epochs', 'train_rows': 650000, 'macro_f1': 0.6856, 'accuracy': 0.7164, 'minutes': 2.9}
+{'split': 'random', 'model': 'Paper CNN 1 epoch', 'train_rows': 650000, 'macro_f1': 0.6475, 'accuracy': 0.6941, 'minutes': 0.4}
+{'split': 'random', 'model': 'Paper LSTM 1 epoch', 'train_rows': 650000, 'macro_f1': 0.6146, 'accuracy': 0.6668, 'minutes': 8.2}
+{'split': 'random', 'model': 'Paper CNN 10 epochs', 'train_rows': 650000, 'macro_f1': 0.6756, 'accuracy': 0.7178, 'minutes': 4.2}
+done

@@ -1,0 +1,15 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791819953.516124   17296 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791819955.287027   17296 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+train 660,589 val 73,399 test 662,347
+I0000 00:00:1791819960.361775   17296 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:From C:\Machine_Learning-Capstone\.venv\Lib\site-packages\keras\src\backend\tensorflow\core.py:233: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+{'variant': 'control', 'macro_f1': 0.6655, 'accuracy': 0.6999, 'epochs': 8, 'minutes': 14.8}
+{'variant': 'log', 'macro_f1': 0.7385, 'accuracy': 0.7515, 'epochs': 13, 'minutes': 24.4}
+{'variant': 'ports', 'macro_f1': 0.7246, 'accuracy': 0.7488, 'epochs': 14, 'minutes': 31.3}
+{'variant': 'log+ports', 'macro_f1': 0.7605, 'accuracy': 0.7713, 'epochs': 15, 'minutes': 30.9}
+done

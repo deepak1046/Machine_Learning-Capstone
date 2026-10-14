@@ -1,0 +1,22 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791878882.415303   11696 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791878889.423889   11696 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+    13  group XGBoost                              662,347 rows  accuracy 0.8016  10s
+    13  group XGBoost (no ports)                   662,347 rows  accuracy 0.7748  6s
+    13  group Logistic regression                  662,347 rows  accuracy 0.6972  2s
+I0000 00:00:1791878914.080939   11696 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:From C:\Machine_Learning-Capstone\.venv\Lib\site-packages\keras\src\backend\tensorflow\core.py:233: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+    13  group CNN-BiLSTM-Attention v1              662,347 rows  accuracy 0.7183  39s
+    13  group CNN-BiLSTM-Attention v2              662,347 rows  accuracy 0.7682  38s
+    13  group CNN-BiLSTM-Attention v2 + offsets    662,347 rows  accuracy 0.7742  37s
+family  group XGBoost                              662,347 rows  accuracy 0.9731  4s
+family  group XGBoost + offsets                    662,347 rows  accuracy 0.9808  8s
+    13 random XGBoost                              719,661 rows  accuracy 0.7870  7s
+    13 random LightGBM                             719,661 rows  accuracy 0.7905  12s
+    13 random CNN-BiLSTM-Attention v2              719,661 rows  accuracy 0.7667  44s
+family random XGBoost                              719,661 rows  accuracy 0.9519  5s
+done

@@ -1,0 +1,8 @@
+[13/random] fit 2,590,777 val 287,864 test 719,661 classes 13
+{'task': '13', 'split': 'random', 'model': 'LightGBM', 'macro_f1': 0.7933, 'accuracy': 0.7897}
+{'task': '13', 'split': 'random', 'model': 'LightGBM + engineered features', 'macro_f1': 0.7935, 'accuracy': 0.7899}
+{'task': '13', 'split': 'random', 'model': 'XGBoost (train minus val)', 'macro_f1': 0.7905, 'accuracy': 0.7866}
+{'task': '13', 'split': 'random', 'model': 'Ensemble (XGB + LGB + LGB-eng)', 'macro_f1': 0.7933, 'accuracy': 0.7898}
+{'task': '13', 'split': 'random', 'model': 'LightGBM + eng + tuned offsets', 'macro_f1': 0.7946, 'accuracy': 0.7923}
+{'task': '13', 'split': 'random', 'model': 'Ensemble + tuned offsets', 'macro_f1': 0.7946, 'accuracy': 0.7925}
+done

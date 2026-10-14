@@ -1,0 +1,8 @@
+[family/group] fit 2,540,032 val 395,923 test 662,347 classes 8
+{'task': 'family', 'split': 'group', 'model': 'LightGBM', 'macro_f1': 0.9719, 'accuracy': 0.9695}
+{'task': 'family', 'split': 'group', 'model': 'LightGBM + engineered features', 'macro_f1': 0.9726, 'accuracy': 0.9702}
+{'task': 'family', 'split': 'group', 'model': 'XGBoost (train minus val)', 'macro_f1': 0.9712, 'accuracy': 0.9687}
+{'task': 'family', 'split': 'group', 'model': 'Ensemble (XGB + LGB + LGB-eng)', 'macro_f1': 0.9721, 'accuracy': 0.9696}
+{'task': 'family', 'split': 'group', 'model': 'LightGBM + eng + tuned offsets', 'macro_f1': 0.9825, 'accuracy': 0.9819}
+{'task': 'family', 'split': 'group', 'model': 'Ensemble + tuned offsets', 'macro_f1': 0.9821, 'accuracy': 0.9814}
+done

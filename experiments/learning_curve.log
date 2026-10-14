@@ -1,0 +1,8 @@
+{'frac': 0.1, 'mode': 'groups', 'rows': 278265, 'f1': 0.7261, 'acc': 0.7596, 'rounds': 64, 'sec': 20}
+{'frac': 0.1, 'mode': 'rows', 'rows': 254003, 'f1': 0.7822, 'acc': 0.7969, 'rounds': 74, 'sec': 21}
+{'frac': 0.25, 'mode': 'groups', 'rows': 658512, 'f1': 0.7662, 'acc': 0.7836, 'rounds': 57, 'sec': 24}
+{'frac': 0.25, 'mode': 'rows', 'rows': 635008, 'f1': 0.7876, 'acc': 0.8043, 'rounds': 85, 'sec': 37}
+{'frac': 0.5, 'mode': 'groups', 'rows': 1287797, 'f1': 0.7817, 'acc': 0.8013, 'rounds': 72, 'sec': 42}
+{'frac': 0.5, 'mode': 'rows', 'rows': 1270016, 'f1': 0.7873, 'acc': 0.8022, 'rounds': 81, 'sec': 53}
+{'frac': 1.0, 'mode': 'groups', 'rows': 2540032, 'f1': 0.7885, 'acc': 0.8045, 'rounds': 85, 'sec': 72}
+done

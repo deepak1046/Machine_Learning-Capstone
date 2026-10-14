@@ -1,0 +1,55 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791827679.508787   32664 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791827681.363962   32664 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+[group] train 2,642,359  val 293,596  test 662,347
+I0000 00:00:1791827697.639484   32664 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:From C:\Machine_Learning-Capstone\.venv\Lib\site-packages\keras\src\backend\tensorflow\core.py:233: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+Epoch 1/30
+2581/2581 - 455s - 176ms/step - accuracy: 0.7274 - loss: 0.5596 - val_accuracy: 0.7435 - val_loss: 0.5191 - learning_rate: 0.0010
+Epoch 2/30
+2581/2581 - 479s - 186ms/step - accuracy: 0.7499 - loss: 0.4979 - val_accuracy: 0.7500 - val_loss: 0.5133 - learning_rate: 0.0010
+Epoch 3/30
+2581/2581 - 462s - 179ms/step - accuracy: 0.7549 - loss: 0.4885 - val_accuracy: 0.7667 - val_loss: 0.4942 - learning_rate: 0.0010
+Epoch 4/30
+2581/2581 - 491s - 190ms/step - accuracy: 0.7574 - loss: 0.4833 - val_accuracy: 0.7637 - val_loss: 0.4993 - learning_rate: 0.0010
+Epoch 5/30
+2581/2581 - 462s - 179ms/step - accuracy: 0.7602 - loss: 0.4772 - val_accuracy: 0.7549 - val_loss: 0.5111 - learning_rate: 0.0010
+Epoch 6/30
+2581/2581 - 480s - 186ms/step - accuracy: 0.7665 - loss: 0.4650 - val_accuracy: 0.7656 - val_loss: 0.4934 - learning_rate: 5.0000e-04
+Epoch 7/30
+2581/2581 - 486s - 188ms/step - accuracy: 0.7673 - loss: 0.4625 - val_accuracy: 0.7717 - val_loss: 0.4842 - learning_rate: 5.0000e-04
+Epoch 8/30
+2581/2581 - 488s - 189ms/step - accuracy: 0.7676 - loss: 0.4617 - val_accuracy: 0.7700 - val_loss: 0.4859 - learning_rate: 5.0000e-04
+Epoch 9/30
+2581/2581 - 458s - 177ms/step - accuracy: 0.7680 - loss: 0.4612 - val_accuracy: 0.7493 - val_loss: 0.5372 - learning_rate: 5.0000e-04
+Epoch 10/30
+2581/2581 - 455s - 176ms/step - accuracy: 0.7709 - loss: 0.4559 - val_accuracy: 0.7636 - val_loss: 0.5014 - learning_rate: 2.5000e-04
+Epoch 11/30
+2581/2581 - 476s - 185ms/step - accuracy: 0.7715 - loss: 0.4550 - val_accuracy: 0.7752 - val_loss: 0.4732 - learning_rate: 2.5000e-04
+Epoch 12/30
+2581/2581 - 453s - 175ms/step - accuracy: 0.7717 - loss: 0.4546 - val_accuracy: 0.7698 - val_loss: 0.4861 - learning_rate: 2.5000e-04
+Epoch 13/30
+2581/2581 - 460s - 178ms/step - accuracy: 0.7717 - loss: 0.4543 - val_accuracy: 0.7576 - val_loss: 0.4882 - learning_rate: 2.5000e-04
+Epoch 14/30
+2581/2581 - 467s - 181ms/step - accuracy: 0.7735 - loss: 0.4511 - val_accuracy: 0.7684 - val_loss: 0.4931 - learning_rate: 1.2500e-04
+Epoch 15/30
+2581/2581 - 449s - 174ms/step - accuracy: 0.7735 - loss: 0.4507 - val_accuracy: 0.7613 - val_loss: 0.5105 - learning_rate: 1.2500e-04
+[group] macro-F1 0.7443  accuracy 0.7682  15 epochs  117 min
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Machine_Learning-Capstone\src\training\hybrid_v2.py", line 97, in <module>
+    train_split(name)
+  File "C:\Machine_Learning-Capstone\src\training\hybrid_v2.py", line 87, in train_split
+    pd.concat([table[table["split"] != split_name], row], ignore_index=True).to_csv(results_path, index=False)
+                     ~~~~~^^^^^^^^^
+  File "C:\Machine_Learning-Capstone\.venv\Lib\site-packages\pandas\core\frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Machine_Learning-Capstone\.venv\Lib\site-packages\pandas\core\indexes\range.py", line 525, in get_loc
+    raise KeyError(key)
+KeyError: 'split'
